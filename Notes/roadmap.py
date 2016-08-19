@@ -623,6 +623,38 @@ HTML[0:500]
 
 # Looking for the more link
 //a[text()="More"]/@href
+
+# Other ways
+best1        = Selector(text=HTML).xpath('/html/body/div/p/a[@class="bestof-link"]')
+nested_best1 = best1.xpath('./span[@class="bestof-text"]/text()').extract()
+print nested_best1
+
+# Through command line
+mkdir scrapy_projects
+scrapy startproject craigslist
+"""
+Creates pregenerated files from scrapy
+
+craigslist/
+    scrapy.cfg
+    craigslist/
+        __init__.py
+        items.py
+        pipelines.py
+        settings.py
+        spiders/
+            __init__.py
+            ...
+
+scrapy.cfg: the project configuration file
+craigslist/: the project’s python module, you’ll later import your code from here.
+craigslist/items.py: the project’s items file.
+craigslist/pipelines.py: the project’s pipelines file.
+craigslist/settings.py: the project’s settings file.
+craigslist/spiders/: a directory where you’ll later put your spiders.
+"""
+scrapy shell http://sfbay.craigslist.org/search/sfc/apa
+scrapy crawl craigslist -o apts.csv # -o saves file to apts.csv
 #=====================================================================================================
 
 
